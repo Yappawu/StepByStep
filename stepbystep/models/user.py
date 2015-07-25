@@ -12,6 +12,7 @@ from hashlib import md5
 def load_user(id):
     return UserModel.objects(id=id).first()
 
+
 class AccountItem(db.Document):
     origin_oj = db.StringField()
     username = db.StringField(max_length=255)
@@ -67,11 +68,15 @@ class UserModel(db.Document, UserMixin):
         )
 
     def can(self, permissions):
-        return (self.role is not None and
-                (self.role.permissions & permissions) == permissions)
+        return True
+        # TODO
+        # return (self.role is not None and
+                # (self.role.permissions & permissions) == permissions)
 
     def is_administrator(self):
-        return self.can(Permission.ADMINISTER)
+        return True
+        # TODO add permission
+        # return self.can(Permission.ADMINISTER)
 
     def __unicode__(self):
         return self.username

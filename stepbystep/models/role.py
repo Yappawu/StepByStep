@@ -1,6 +1,7 @@
 from stepbystep import db
 from datetime import datetime
 
+
 class RoleModel(db.Document):
     name = db.StringField(max_length=80, unique=True)
     description = db.StringField(max_length=255)

@@ -10,7 +10,7 @@ class CategoryModel(db.Document):
             'CategoryModel',
             reverse_delete_rule = NULLIFY
         ),
-        default=[]
+        default=[],
     )
     problems = db.ListField(
         db.ReferenceField(
@@ -23,3 +23,6 @@ class CategoryModel(db.Document):
         default = datetime.now,
         required = True
     )
+
+    def __unicode__(self):
+        return '%s' % self.name

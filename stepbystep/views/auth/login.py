@@ -1,4 +1,5 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
+
 from flask import (
     request,
     redirect,
@@ -10,6 +11,7 @@ from flask.views import MethodView
 from flask.ext.login import current_user, login_user
 
 from stepbystep.forms import LoginForm
+
 
 class LoginView(MethodView):
 
