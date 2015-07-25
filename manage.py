@@ -1,5 +1,5 @@
 #-*- coding: utf-8 -*-
-from VJ import app, db
+from stepbystep import app, db
 from flask.ext.script import Manager, Server, Shell
 
 manager = Manager(app)
