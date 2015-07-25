@@ -18,11 +18,20 @@ with app.app_context():
     login_manager.init_app(app)
     login_manager.login_view = 'auth.login'
 
+    from .admin import admin
+    admin.init_app(app)
+
     from .views import (
         bp_index,
+        bp_auth,
     )
 
     app.register_blueprint(
         bp_index,
         url_prefix='/'
+    )
+
+    app.register_blueprint(
+        bp_auth,
+        url_prefix='/auth'
     )

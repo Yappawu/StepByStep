@@ -16,8 +16,11 @@ class AdminIndexView(_AdminIndexView):
             return redirect(url_for('auth.login', next=request.url))
 
 
-flask_admin = Admin(
-    name='后台管理', index_view=AdminIndexView(name='主页'),
-    template_mode='bootstrap3')
+admin = Admin(
+    name='StepByStep',
+    index_view=AdminIndexView(name='Index'),
+    base_template='admin/base.html',
+    template_mode='admin'
+)
 
 # from . import user  # noqa

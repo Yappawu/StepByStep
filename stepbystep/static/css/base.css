@@ -2,6 +2,11 @@ body {
     padding-top: 60px;
 }
 
+.nav-tabs{
+    padding-top: 20px;
+    margin-bottom: 10px
+}
+
 .content{
     margin-top: 20px
 }
