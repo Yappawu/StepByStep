@@ -2,11 +2,12 @@
 from stepbystep import app, db
 from flask.ext.script import Manager, Server, Shell
 
+from stepbystep.models import UserModel
+
 manager = Manager(app)
 
-
 def make_shell_context():
-    return dict(app=app, db=db)
+    return dict(app=app, db=db, UserModel=UserModel)
 
 manager.add_command("runserver", Server(
         use_debugger=True,
