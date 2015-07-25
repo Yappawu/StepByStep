@@ -23,9 +23,15 @@ with app.app_context():
 
     from .views import (
         bp_index,
+        bp_auth,
     )
 
     app.register_blueprint(
         bp_index,
         url_prefix='/'
+    )
+
+    app.register_blueprint(
+        bp_auth,
+        url_prefix='/auth'
     )
