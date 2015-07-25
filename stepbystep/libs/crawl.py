@@ -4,8 +4,6 @@ from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
 from scrapy.utils.log import configure_logging
 
-from base64 import b64encode
-
 settings = get_project_settings()
 
 class AccountCrawler():
