@@ -12,7 +12,7 @@ from stepbystep.models import UserModel, RoleModel
 class UserAdmin(ModelViewMixin):
 
     column_list = [
-        'username', 'roles', 'poj', 'sdut', 'created_at']
+        'username', 'role', 'poj', 'sdut', 'created_at']
     column_filters = ['username']
     column_searchable_list = ['username']
 

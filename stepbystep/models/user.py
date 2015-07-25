@@ -5,8 +5,9 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from stepbystep.models.role import RoleModel
 from flask import current_app
 from mongoengine import DENY, NULLIFY
-
 from hashlib import md5
+
+from .role import Permission
 
 @login_manager.user_loader
 def load_user(id):
@@ -34,10 +35,7 @@ class UserModel(db.Document, UserMixin):
     username = db.StringField(max_length=255)
     password = db.StringField(max_length=255)
     created_at = db.DateTimeField(default=datetime.now, required=True)
-    roles = db.ListField(
-        db.ReferenceField(RoleModel, reverse_delete_rule=DENY),
-        default=[]
-    )
+    role = db.ReferenceField(RoleModel)
 
     poj = db.EmbeddedDocumentField(AccountItem)
     sdut = db.EmbeddedDocumentField(AccountItem)
@@ -66,21 +64,17 @@ class UserModel(db.Document, UserMixin):
     def create_user(cls, username, email, password, **kwargs):
         password = cls.generate_password(password)
         return cls.objects.create(
-            username = username,
-            password = password,
+            username=username,
+            password=password,
             **kwargs
         )
 
     def can(self, permissions):
-        return True
-        # TODO
-        # return (self.role is not None and
-                # (self.role.permissions & permissions) == permissions)
+        return (self.role and
+                (self.role.permissions & permissions) == permissions)
 
     def is_administrator(self):
-        return True
-        # TODO add permission
-        # return self.can(Permission.ADMINISTER)
+        return self.can(Permission.ADMINISTER)
 
     def __unicode__(self):
         return self.username
@@ -88,6 +82,7 @@ class UserModel(db.Document, UserMixin):
     meta = {
         'collection': 'User'
     }
+
 
 class AnonymousUser(AnonymousUserMixin):
     def can(self, permissions):
