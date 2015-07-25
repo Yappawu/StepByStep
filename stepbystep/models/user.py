@@ -13,7 +13,7 @@ def load_user(id):
     return UserModel.objects(id=id).first()
 
 
-class AccountItem(db.Document):
+class AccountItem(db.EmbeddedDocument):
     origin_oj = db.StringField()
     username = db.StringField(max_length=255)
     nickname = db.StringField(max_length=255)
@@ -26,6 +26,10 @@ class AccountItem(db.Document):
         'collection': 'AccountItem'
     }
 
+    def __unicode__(self):
+        return '%s: %s' % (self.origin_oj, self.username)
+
+
 class UserModel(db.Document, UserMixin):
     username = db.StringField(max_length=255)
     password = db.StringField(max_length=255)
@@ -35,8 +39,8 @@ class UserModel(db.Document, UserMixin):
         default=[]
     )
 
-    poj = db.ReferenceField(AccountItem, reverse_delete_rule=NULLIFY)
-    sdut = db.ReferenceField(AccountItem, reverse_delete_rule=NULLIFY)
+    poj = db.EmbeddedDocumentField(AccountItem)
+    sdut = db.EmbeddedDocumentField(AccountItem)
 
     last_login_at = db.DateTimeField()
     current_login_at = db.DateTimeField()
