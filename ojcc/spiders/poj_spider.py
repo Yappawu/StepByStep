@@ -9,7 +9,8 @@ class PojAccountSpider(Spider):
     allowed_domains = ['poj.org']
 
     accepted_url = \
-        'http://poj.org/status?problem_id=&user_id=%s&result=0&language='
+        'http://poj.org/status?problem_id=\
+        &user_id=%s&result=0&language='
 
     download_delay = 1
     solved = {}
@@ -57,7 +58,10 @@ class PojAccountSpider(Spider):
             self.item['solved'] = self.solved
 
         if table_tr:
-            yield Request('http://' + self.allowed_domains[0] + '/' + next_url,
+            yield Request(
+                'http://' +
+                self.allowed_domains[0] +
+                '/' + next_url,
                 callback = self.accepted
             )
 

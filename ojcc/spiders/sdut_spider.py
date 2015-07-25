@@ -9,7 +9,8 @@ class SdutAccountSpider(Spider):
     allowed_domains = ['acm.sdut.edu.cn']
 
     accepted_url = \
-        'http://acm.sdut.edu.cn/sdutoj/status.php?username=%s&pro_lang=ALL&result=1'
+        'http://acm.sdut.edu.cn/sdutoj/status.php?\
+        username=%s&pro_lang=ALL&result=1'
 
     solved = {}
 
@@ -70,7 +71,11 @@ class SdutAccountSpider(Spider):
                 self.item['solved'] = self.solved
 
         if table_tr:
-            yield Request('http://' + self.allowed_domains[0] + '/sdutoj/' + next_url,
+            yield Request(
+                'http://' +
+                self.allowed_domains[0] +
+                '/sdutoj/' +
+                next_url,
                 callback = self.accepted
             )
 
