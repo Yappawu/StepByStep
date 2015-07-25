@@ -5,23 +5,27 @@ from __future__ import unicode_literals
 import os
 from celery.schedules import crontab
 
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
-class Config(object):
+
+class Config:
+    import sys
+    reload(sys)
+    sys.setdefaultencoding('utf-8')
 
     SECRET_KEY = (
         os.environ.get('SECRET_KEY') or
         '\x11\xbe\xbb\xf0\x7fz\x9d\x01\x07\xa0'
         '\xd0J\xec\xbbw\nfc\xc5Q\xd0\x8cd\xf1')
+    CSRF_ENABLED = True
 
     MONGODB_SETTINGS = {
-        'db': 'StepByStep',
+        'db': 'stepbystep',
         'username': '',
         'password': '',
         'host': '127.0.0.1',
         'port': 27017
     }
-    SQLALCHEMY_RECORD_QUERIES = True
-    # SQLALCHEMY_ECHO = True
 
     # redis
     REDIS_URL = 'redis://%s:%s/%s' % (
@@ -37,7 +41,7 @@ class Config(object):
 
     CELERYBEAT_SCHEDULE = {
         'test': {
-            'task': 'sbs.core.tasks.test',
+            'task': 'stepbystep.libs.tasks.test',
             'schedule': crontab(minute='*/1'),
             'args': (1, 2, 3)
         },
@@ -65,6 +69,5 @@ config = {
     'development': DevelopmentConfig,
     'testing': TestingConfig,
     'production': ProductionConfig,
-
     'default': DevelopmentConfig
 }

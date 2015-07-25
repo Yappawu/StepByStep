@@ -1,20 +1,25 @@
-#!/usr/bin/env python
-
-from sbs import app, db
-from sbs.models import UserModel
-from flask.ext.script import Manager, Shell, Server
+# -*- coding: utf-8 -*-
+from stepbystep import app, db
+from flask.ext.script import Manager, Server, Shell
 
 manager = Manager(app)
 
 
 def make_shell_context():
-    return dict(app=app, db=db, UserModel=UserModel)
+    return dict(app=app, db=db)
 
+manager.add_command("runserver", Server(
+        use_debugger=True,
+        use_reloader=True,
+        host="0.0.0.0",
+        port=4000
+    )
+)
 manager.add_command("shell", Shell(make_context=make_shell_context))
 
-server = Server(host='0.0.0.0', port='5000')
-manager.add_command("runserver", server)
-
+@manager.command
+def deploy():
+    pass
 
 if __name__ == '__main__':
     manager.run()
