@@ -10,7 +10,7 @@ from hashlib import md5
 
 @login_manager.user_loader
 def load_user(id):
-    User.objects(_id=id)
+    return UserModel.objects(id=id).first()
 
 class AccountItem(db.Document):
     origin_oj = db.StringField()
@@ -49,7 +49,7 @@ class UserModel(db.Document, UserMixin):
         )
 
     def set_password(self, password):
-        self.password = generate_password(password)
+        self.password = self.generate_password(password)
 
     def verify_password(self, password):
         return check_password_hash(
@@ -74,7 +74,7 @@ class UserModel(db.Document, UserMixin):
         return self.can(Permission.ADMINISTER)
 
     def __unicode__(self):
-        return self.email
+        return self.username
 
     meta = {
         'collection': 'User'
