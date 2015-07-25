@@ -1,9 +1,8 @@
-from VJ import app
+from stepbystep import app
 from celery import Celery
 
 from crawl import (
-    AccountCrawler,
-    CodeSubmitCrawler
+    AccountCrawler
 )
 
 def make_celery(app):
@@ -21,7 +20,7 @@ def make_celery(app):
 celery = make_celery(app)
 
 @celery.task()
-def account_init(origin_oj, username, password):
+def account_crawler(origin_oj, username):
     crawler = AccountCrawler()
     crawler.crawl(
         origin_oj,
