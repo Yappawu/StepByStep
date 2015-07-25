@@ -1,0 +1,10 @@
+flask==0.10.1
+flask-security==1.7.4
+flask-admin==1.1.0
+flask-script==2.0.5
+pymongo
+flask-mongoengine
+bpython==0.14.2
+celery
+redis
+scrapy
