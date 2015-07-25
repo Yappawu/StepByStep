@@ -1,6 +1,6 @@
 from stepbystep import db, login_manager
 from datetime import datetime
-from flask.ext.security import UserMixin
+from flask.ext.login import UserMixin, AnonymousUserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from stepbystep.models.role import RoleModel
 from flask import current_app
@@ -37,8 +37,6 @@ class UserModel(db.Document, UserMixin):
     poj = db.ReferenceField(AccountItem, reverse_delete_rule=NULLIFY)
     sdut = db.ReferenceField(AccountItem, reverse_delete_rule=NULLIFY)
 
-    active = db.BooleanField(default=True)
-
     last_login_at = db.DateTimeField()
     current_login_at = db.DateTimeField()
     last_login_ip = db.StringField(max_length=255)
@@ -68,9 +66,25 @@ class UserModel(db.Document, UserMixin):
             **kwargs
         )
 
+    def can(self, permissions):
+        return (self.role is not None and
+                (self.role.permissions & permissions) == permissions)
+
+    def is_administrator(self):
+        return self.can(Permission.ADMINISTER)
+
     def __unicode__(self):
         return self.email
 
     meta = {
         'collection': 'User'
     }
+
+class AnonymousUser(AnonymousUserMixin):
+    def can(self, permissions):
+        return False
+
+    def is_administrator(self):
+        return False
+
+login_manager.anonymous_user = AnonymousUser
