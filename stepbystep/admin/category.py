@@ -14,9 +14,14 @@ class CategoryAdmin(ModelViewMixin):
     column_searchable_list = ['name']
 
     form_excluded_columns = ['created_at']
+
     form_ajax_refs = {
         'children': {
             'fields': ['name'],
+            'allow_blank': True,
+        },
+        'problems': {
+            'fields': ['problem_id'],
             'allow_blank': True,
         }
     }

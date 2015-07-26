@@ -3,8 +3,8 @@ from datetime import datetime
 
 
 class ProblemModel(db.Document):
-    origin_oj = db.StringField()
-    problem_id = db.StringField()
+    origin_oj = db.StringField(max_length=255)
+    problem_id = db.StringField(max_length=255)
     created_at = db.DateTimeField(
         default=datetime.now,
         required=True
