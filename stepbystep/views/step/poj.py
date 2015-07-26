@@ -12,6 +12,7 @@ from flask.ext.login import login_user, login_required
 
 from stepbystep.models import ProblemModel
 
+
 class StepPojView(MethodView):
 
     template = 'step/poj.html'

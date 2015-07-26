@@ -8,10 +8,12 @@ from stepbystep.models import UserModel, RoleModel
 
 manager = Manager(app)
 
+
 def make_shell_context():
     return dict(app=app, db=db, UserModel=UserModel, RoleModel=RoleModel)
 
-manager.add_command("runserver", Server(
+manager.add_command(
+    "runserver", Server(
         use_debugger=True,
         use_reloader=True,
         host="0.0.0.0",

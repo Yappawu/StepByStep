@@ -7,6 +7,7 @@ from flask import (
     flash,
     render_template
 )
+
 from flask.views import MethodView
 from flask.ext.login import current_user, login_user
 

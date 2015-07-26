@@ -1,3 +1,3 @@
-from .index import bp_index
-from .auth import bp_auth
-from .step import bp_step
+from .index import bp_index # noqa
+from .auth import bp_auth # noqa
+from .step import bp_step # noqa

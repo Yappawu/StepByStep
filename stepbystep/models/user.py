@@ -5,9 +5,9 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from stepbystep.models.role import RoleModel
 from flask import current_app
 from mongoengine import DENY, NULLIFY
-from hashlib import md5
 
 from .role import Permission
+
 
 @login_manager.user_loader
 def load_user(id):
