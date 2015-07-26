@@ -16,12 +16,8 @@ class CategoryAdmin(ModelViewMixin):
     form_excluded_columns = ['created_at']
 
     form_ajax_refs = {
-        'children': {
+        'parent': {
             'fields': ['name'],
-            'allow_blank': True,
-        },
-        'problems': {
-            'fields': ['problem_id'],
             'allow_blank': True,
         }
     }
