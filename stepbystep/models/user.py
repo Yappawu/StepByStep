@@ -61,7 +61,7 @@ class UserModel(db.Document, UserMixin):
         )
 
     @classmethod
-    def create_user(cls, username, email, password, **kwargs):
+    def create_user(cls, username, password, **kwargs):
         password = cls.generate_password(password)
         return cls.objects.create(
             username=username,
