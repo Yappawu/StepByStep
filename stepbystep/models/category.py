@@ -1,5 +1,5 @@
 from stepbystep import db
-from mongoengine import DENY, NULLIFY
+from mongoengine import DENY
 from datetime import datetime
 
 
@@ -10,8 +10,8 @@ class CategoryModel(db.Document):
         reverse_delete_rule=DENY
     )
     created_at = db.DateTimeField(
-        default = datetime.now,
-        required = True
+        default=datetime.now,
+        required=True
     )
 
     def __unicode__(self):

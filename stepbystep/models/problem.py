@@ -1,6 +1,6 @@
 from stepbystep import db
 from datetime import datetime
-from mongoengine import DENY, NULLIFY
+from mongoengine import DENY
 from .category import CategoryModel
 
 
