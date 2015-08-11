@@ -1,7 +1,6 @@
 from stepbystep import db
 from datetime import datetime
 from mongoengine import DENY
-from .category import CategoryModel
 
 
 class ProblemModel(db.Document):
@@ -11,10 +10,19 @@ class ProblemModel(db.Document):
         'CategoryModel',
         reverse_delete_rule=DENY
     )
+    genera = db.ReferenceField(
+        'CategoryModel',
+        reverse_delete_rule=DENY
+    )
+    ordinal = db.IntField(default=0)
     created_at = db.DateTimeField(
         default=datetime.now,
         required=True
     )
+
+    meta = {
+        'ordering': ['ordinal']
+    }
 
     def __unicode__(self):
         return '%s: %s' % (self.origin_oj, self.problem_id)

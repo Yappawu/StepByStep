@@ -10,7 +10,7 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 
 class Config:
     import sys
-    reload(sys)
+    reload(sys)  # noqa
     sys.setdefaultencoding('utf-8')
 
     SECRET_KEY = (
@@ -40,10 +40,13 @@ class Config:
         os.environ.get('REDIS_PORT', '6379'))
 
     CELERYBEAT_SCHEDULE = {
-        'test': {
-            'task': 'stepbystep.libs.tasks.test',
-            'schedule': crontab(minute='*/1'),
-            'args': (1, 2, 3)
+        'sdut_schedule': {
+            'task': 'stepbystep.libs.tasks.sdut_schedule',
+            'schedule': crontab(hour="*/12"),
+        },
+        'poj_schedule': {
+            'task': 'stepbystep.libs.tasks.poj_schedule',
+            'schedule': crontab(hour="*/6"),
         },
     }
 

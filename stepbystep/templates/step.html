@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}{% endblock %}
+
+{% block page_content %}
+<div id="step_problem" class="col-md-3 fix_div1">
+  <table class="table table-bordered">
+    <tbody>
+    <tr>
+        <td colspan="3">{{ordinal}}</td>
+    </tr>
+    <tr>
+        <td>专项</td>
+        <td>专题</td>
+        <td>题目</td>
+    </tr>
+    {% for problem in problems %}
+    <tr>
+      <td>{{ problem.category.parent.name }}</td>
+      <td>{{ problem.category.name }}</td>
+      <td>{{ problem.problem_id }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+<div id="step_user" class="col-md-8 fix_div2">
+  <table class="table table-bordered" id="table_user">
+    <thead>
+      <tr height="74px">
+        {% for user in users %}
+        <th width="100px">{{ user.name }}<br>{{ user.grade }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+  </table>
+</div>
+<div id="step_solution" class="col-md-8">
+  <table class="table table-bordered" id="table_solution"> 
+    <tbody>
+      {% for problem in problems %}
+        <tr height="37px">
+          {% if problem.origin_oj == 'sdut' %}
+            {% for user in users %}
+              <td width="100px"> 
+              {% if user.sdut and user.sdut.solved %} 
+                  {{ user.sdut.solved.get(problem.problem_id, '') }} 
+              {% endif %}
+              </td>
+            {% endfor %}
+          {% elif problem.origin_oj == 'poj' %}
+            {% for user in users %}
+              <td width="100px">
+                {% if user.poj and user.poj.solved %} 
+                  {{ user.poj.solved[problem.problem_id][0] }} 
+                {% endif %} 
+              </td>
+            {% endfor %}
+          {% endif %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
+
+{% block script %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/table.js') }}"></script>
+<script type="text/javascript">
+  function addEvent(obj, type, fn){
+      if(obj.attachEvent){
+          obj.attachEvent('on'+type, function(){fn.call(obj);})
+      }
+      else{
+          obj.addEventListener(type, fn, false);
+      }
+  }
+  addEvent(window, 'scroll', function(){
+    $("#step_problem").css('left', document.body.scrollLeft);
+  });
+  addEvent(window, 'scroll', function(){
+    $("#step_user").css('top', document.body.scrollTop);
+  });
+</script>
+{% endblock %}

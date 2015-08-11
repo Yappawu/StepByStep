@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import random
 
 from stepbystep import app, db
 from flask.ext.script import Manager, Server, Shell
@@ -25,13 +24,16 @@ manager.add_command("shell", Shell(make_context=make_shell_context))
 
 @manager.command
 def deploy():
-    username = 'admin%s' % random.randint(1, 0xffffff)
-    password = username
-    UserModel.create_user(
-        username=username,
-        password=password
+    RoleModel.insert_roles()
+    admin = RoleModel.objects(name='admin').first()
+
+    user = UserModel.create_user(
+        username='admin',
+        name='admin',
+        password='admin'
     )
-    print 'username: %s, password: %s' % (username, password)
+    user.roles.append(admin)
+    user.save()
 
 
 if __name__ == '__main__':
