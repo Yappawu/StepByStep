@@ -3,7 +3,7 @@ import os
 from flask import Flask
 from flask.ext.login import LoginManager
 from flask.ext.mongoengine import MongoEngine
-from config import config
+from .config import config
 
 app = Flask(__name__)
 db = MongoEngine()
