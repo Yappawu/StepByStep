@@ -2,13 +2,16 @@ body {
     padding-top: 60px;
 }
 
-.nav-tabs{
-    padding-top: 20px;
-    margin-bottom: 10px
+td{
+    white-space: nowrap;
 }
 
-.content{
-    margin-top: 20px
+.table-bordered>thead>tr>th{
+    border-bottom-width: 0px
+}
+
+th{
+    white-space: nowrap;
 }
 
 .right{
@@ -17,6 +20,38 @@ body {
 
 .left{
     float: left;
+}
+
+#step_problem{
+    background-color:#FFFFFF;
+    text-align: center; 
+    left: 0px
+}
+
+#step_user{
+    background-color:#FFFFFF;
+    height: 74px;
+    top: 0px
+}
+
+#table_user{
+    background-color:#FFFFFF;
+    table-layout:fixed;
+}
+
+#step_solution{
+}
+
+#table_solution{
+    table-layout:fixed;
+}
+
+.fix_div1{
+    z-index: 2
+}
+
+.fix_div2{
+    z-index: 1
 }
 
 /*
