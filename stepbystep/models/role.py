@@ -13,7 +13,7 @@ class RoleModel(db.Document):
         roles = {
                 'program_1': '程序设计基础I（SDUTOJ）',
                 'program_2': '程序设计基础II（SDUTOJ）',
-                'date_structure': '数据结构（SDUTOJ）',
+                'data_structure': '数据结构（SDUTOJ）',
                 'junior': '算法初级（POJ）',
                 'middle': '算法中级（POJ）',
                 'senior': '算法高级（POJ）',

@@ -2,16 +2,13 @@ body {
     padding-top: 60px;
 }
 
-td{
-    white-space: nowrap;
-}
-
 .table-bordered>thead>tr>th{
     border-bottom-width: 0px
 }
 
-th{
-    white-space: nowrap;
+table{
+    table-layout:fixed;
+    text-align: center; 
 }
 
 .right{
@@ -22,28 +19,47 @@ th{
     float: left;
 }
 
+#step_head{
+    margin-bottom: 0px;
+    border-bottom: 0px;
+    text-align: center; 
+}
+
+#step_head th{
+    text-align: center; 
+}
+
 #step_problem{
     background-color:#FFFFFF;
-    text-align: center; 
+    white-space: nowrap;
     left: 0px
+}
+
+#table_problem th{
+    text-align: center; 
+}
+
+#table_problem td{
+    overflow:hidden;
+    text-overflow: ellipsis;
 }
 
 #step_user{
     background-color:#FFFFFF;
     height: 74px;
+    white-space: nowrap;
     top: 0px
 }
 
 #table_user{
     background-color:#FFFFFF;
-    table-layout:fixed;
 }
 
 #step_solution{
+    white-space: nowrap;
 }
 
 #table_solution{
-    table-layout:fixed;
 }
 
 .fix_div1{

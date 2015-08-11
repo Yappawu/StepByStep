@@ -28,8 +28,12 @@ class StepSdutView(MethodView):
         ordinal = CategoryModel.objects.get_or_404(
             ordinal=ORDINAL.get(ordinal), origin_oj='sdut')
         problems = ProblemModel.objects(
-            origin_oj='sdut', genera=ordinal).order_by('ordinal').all()
-        users = UserModel.objects(roles__0=role).all()
+            origin_oj='sdut',
+            genera=ordinal
+        ).all()
+        problems = list(problems)
+        problems.sort(cmp=ProblemModel.p_cmp)
+        users = UserModel.objects(roles=role).all()
 
         return render_template(
             self.template,
