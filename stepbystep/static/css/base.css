@@ -2,16 +2,8 @@ body {
     padding-top: 60px;
 }
 
-td{
-    white-space: nowrap;
-}
-
 .table-bordered>thead>tr>th{
     border-bottom-width: 0px
-}
-
-th{
-    white-space: nowrap;
 }
 
 .right{
@@ -31,6 +23,7 @@ th{
 #step_user{
     background-color:#FFFFFF;
     height: 74px;
+    white-space: nowrap;
     top: 0px
 }
 
@@ -40,6 +33,7 @@ th{
 }
 
 #step_solution{
+    white-space: nowrap;
 }
 
 #table_solution{

@@ -51,7 +51,7 @@
             {% for user in users %}
               <td width="100px">
                 {% if user.poj and user.poj.solved %} 
-                  {{ user.poj.solved[problem.problem_id][0] }} 
+                  {{ user.poj.solved.get(problem.problem_id, '') }} 
                 {% endif %} 
               </td>
             {% endfor %}
