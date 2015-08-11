@@ -2,11 +2,9 @@ from stepbystep import db, login_manager
 from datetime import datetime
 from flask.ext.login import UserMixin, AnonymousUserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
-from stepbystep.models.role import RoleModel
 from flask import current_app
-from mongoengine import DENY, NULLIFY
-
-from .role import Permission
+from .role import RoleModel
+from mongoengine import DENY, NULLIFY  # noqa
 
 
 @login_manager.user_loader
@@ -14,7 +12,7 @@ def load_user(id):
     return UserModel.objects(id=id).first()
 
 
-class AccountItem(db.EmbeddedDocument):
+class AccountItem(db.Document):
     origin_oj = db.StringField()
     username = db.StringField(max_length=255)
     nickname = db.StringField(max_length=255)
@@ -33,12 +31,20 @@ class AccountItem(db.EmbeddedDocument):
 
 class UserModel(db.Document, UserMixin):
     username = db.StringField(max_length=255)
+    name = db.StringField(max_length=255)
     password = db.StringField(max_length=255)
     created_at = db.DateTimeField(default=datetime.now, required=True)
-    role = db.ReferenceField(RoleModel)
+    roles = db.ListField(
+        db.ReferenceField(
+            'RoleModel',
+            reverse_delete_rule=DENY
+        ),
+        default=[]
+    )
+    grade = db.StringField(max_length=255)
 
-    poj = db.EmbeddedDocumentField(AccountItem)
-    sdut = db.EmbeddedDocumentField(AccountItem)
+    poj = db.ReferenceField(AccountItem, reverse_delete_rule=NULLIFY)
+    sdut = db.ReferenceField(AccountItem, reverse_delete_rule=NULLIFY)
 
     last_login_at = db.DateTimeField()
     current_login_at = db.DateTimeField()
@@ -69,12 +75,9 @@ class UserModel(db.Document, UserMixin):
             **kwargs
         )
 
-    def can(self, permissions):
-        return (self.role and
-                (self.role.permissions & permissions) == permissions)
-
     def is_administrator(self):
-        return self.can(Permission.ADMINISTER)
+        admin = RoleModel.objects(name='admin').first()
+        return admin in self.roles
 
     def __unicode__(self):
         return self.username
