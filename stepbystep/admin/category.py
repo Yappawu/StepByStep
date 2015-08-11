@@ -9,7 +9,7 @@ from stepbystep.models import CategoryModel
 
 class CategoryAdmin(ModelViewMixin):
 
-    column_list = ['name', 'created_at']
+    column_list = ['name', 'ordinal', 'created_at']
     column_filters = ['name']
     column_searchable_list = ['name']
 
