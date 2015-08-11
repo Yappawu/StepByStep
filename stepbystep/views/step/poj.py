@@ -28,7 +28,11 @@ class StepPojView(MethodView):
         ordinal = CategoryModel.objects.get_or_404(
             ordinal=ORDINAL.get(ordinal), origin_oj='poj')
         problems = ProblemModel.objects(
-            origin_oj='poj', genera=ordinal).order_by('ordinal').all()
+            origin_oj='poj',
+            genera=ordinal
+        ).all()
+        problems = list(problems)
+        problems.sort(cmp=ProblemModel.p_cmp)
         users = UserModel.objects(roles=role).all()
 
         return render_template(
