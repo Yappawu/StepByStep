@@ -36,6 +36,7 @@ table{
 #step_problem{
     background-color:#FFFFFF;
     white-space: nowrap;
+    padding-right: 0px;
     left: 0px
 }
 
