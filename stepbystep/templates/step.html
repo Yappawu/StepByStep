@@ -88,4 +88,20 @@
     $("#step_user").css('top', document.body.scrollTop);
   });
 </script>
+<script>
+$(document).ready(function(){
+  var now = new Date();
+  var week_date = new Date(now.getTime() - 7 * 24 * 3600 * 1000);
+  $("#table_solution td").each(function () {
+    var submit_date = new Date($(this).text().replace(/-/g, "/"));
+    if(! isNaN(submit_date)){
+      if(submit_date > week_date){
+        $(this).addClass("danger");
+      }else{
+        $(this).addClass("success");
+      } 
+    } 
+  });
+})
+</script>
 {% endblock %}

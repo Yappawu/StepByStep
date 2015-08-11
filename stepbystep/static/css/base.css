@@ -6,6 +6,11 @@ body {
     border-bottom-width: 0px
 }
 
+table{
+    table-layout:fixed;
+    text-align: center; 
+}
+
 .right{
     float: right;
 }
@@ -14,10 +19,29 @@ body {
     float: left;
 }
 
+#step_head{
+    margin-bottom: 0px;
+    border-bottom: 0px;
+    text-align: center; 
+}
+
+#step_head th{
+    text-align: center; 
+}
+
 #step_problem{
     background-color:#FFFFFF;
-    text-align: center; 
+    white-space: nowrap;
     left: 0px
+}
+
+#table_problem th{
+    text-align: center; 
+}
+
+#table_problem td{
+    overflow:hidden;
+    text-overflow: ellipsis;
 }
 
 #step_user{
@@ -29,7 +53,6 @@ body {
 
 #table_user{
     background-color:#FFFFFF;
-    table-layout:fixed;
 }
 
 #step_solution{
@@ -37,7 +60,6 @@ body {
 }
 
 #table_solution{
-    table-layout:fixed;
 }
 
 .fix_div1{
