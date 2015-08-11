@@ -1,8 +1,9 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 from scrapy.spiders import Spider
-from scrapy.http import Request, FormRequest
+from scrapy.http import Request, FormRequest  # noqa
 from scrapy.selector import Selector
 from ojcc.items import AccountItem
+
 
 class PojAccountSpider(Spider):
     name = 'poj_user'
@@ -15,7 +16,8 @@ class PojAccountSpider(Spider):
     download_delay = 1
     solved = {}
 
-    def __init__(self,
+    def __init__(
+            self,
             username='sdutacm1', *args, **kwargs):
         super(PojAccountSpider, self).__init__(*args, **kwargs)
 
@@ -37,8 +39,9 @@ class PojAccountSpider(Spider):
             xpath('.//td/a/text()').extract()[0]
         self.item['submit'] = sel.xpath('//center/table/tr')[3].\
             xpath('.//td/a/text()').extract()[0]
-        yield Request(self.accepted_url % self.username,
-            callback = self.accepted
+        yield Request(
+            self.accepted_url % self.username,
+            callback=self.accepted
         )
 
         yield self.item
@@ -50,9 +53,10 @@ class PojAccountSpider(Spider):
         next_url = sel.xpath('//p/a/@href')[2].extract()
         table_tr = sel.xpath('//table')[-1].xpath('.//tr')[1:]
         for tr in table_tr:
-            name = tr.xpath('.//td/a/text()').extract()[0]
+            name = tr.xpath('.//td/a/text()').extract()[0]  # noqa
             problem_id = tr.xpath('.//td[3]/a/text()').extract()[0].strip()
-            submit_time = tr.xpath('.//td/text()').extract()[-1]
+            _submit_time = tr.xpath('.//td/text()').extract()[-1]
+            submit_time = _submit_time.split(' ')[0]
 
             self.solved[problem_id] = submit_time
             self.item['solved'] = self.solved
@@ -62,7 +66,7 @@ class PojAccountSpider(Spider):
                 'http://' +
                 self.allowed_domains[0] +
                 '/' + next_url,
-                callback = self.accepted
+                callback=self.accepted
             )
 
         yield self.item
