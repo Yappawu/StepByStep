@@ -4,20 +4,26 @@
 
 {% block page_content %}
 <div id="step_problem" class="col-md-3 fix_div1">
-  <table class="table table-bordered">
+  <table class="table table-bordered" id="step_head">
+    <thead>
+      <tr>
+          <th colspan="3">{{ordinal}}</th>
+      </tr>
+    </thead>
+  </table>
+  <table class="table table-bordered" id="table_problem">
+    <thead>
+      <tr>
+          <th width="24%">专项</td>
+          <th>专题</th>
+          <th width="16%">题目</th>
+      </tr>
+    </thead>
     <tbody>
-    <tr>
-        <td colspan="3">{{ordinal}}</td>
-    </tr>
-    <tr>
-        <td>专项</td>
-        <td>专题</td>
-        <td>题目</td>
-    </tr>
     {% for problem in problems %}
     <tr>
-      <td>{{ problem.category.parent.name }}</td>
-      <td>{{ problem.category.name }}</td>
+      <td style="white-space: normal" title="{{ problem.category.parent.name }}">{{ problem.category.parent.name }}</td>
+      <td title="{{ problem.category.name }}">{{ problem.category.name }}</td>
       <td>{{ problem.problem_id }}</td>
     </tr>
     {% endfor %}
@@ -28,7 +34,7 @@
     <thead>
       <tr height="74px">
         {% for user in users %}
-        <th width="100px">{{ user.name }}<br>{{ user.grade }}</th>
+        <th width="90px">{{ user.name }}<br>{{ user.grade }}</th>
         {% endfor %}
       </tr>
     </thead>
@@ -41,7 +47,7 @@
         <tr height="37px">
           {% if problem.origin_oj == 'sdut' %}
             {% for user in users %}
-              <td width="100px"> 
+              <td width="90px"> 
               {% if user.sdut and user.sdut.solved %} 
                   {{ user.sdut.solved.get(problem.problem_id, '') }} 
               {% endif %}
@@ -49,7 +55,7 @@
             {% endfor %}
           {% elif problem.origin_oj == 'poj' %}
             {% for user in users %}
-              <td width="100px">
+              <td width="90px">
                 {% if user.poj and user.poj.solved %} 
                   {{ user.poj.solved.get(problem.problem_id, '') }} 
                 {% endif %} 
