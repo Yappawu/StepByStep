@@ -2,6 +2,10 @@ body {
     padding-top: 60px;
 }
 
+.content{
+    margin-top: 20px;
+}
+
 .table-bordered>thead>tr>th{
     border-bottom-width: 0px
 }
