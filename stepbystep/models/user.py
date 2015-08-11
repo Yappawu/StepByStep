@@ -29,6 +29,11 @@ class AccountItem(db.Document):
         return '%s: %s' % (self.origin_oj, self.username)
 
 
+class Account(db.EmbeddedDocument):
+    user_id = db.StringField(max_length=255)
+    account = db.ReferenceField(AccountItem)
+
+
 class UserModel(db.Document, UserMixin):
     username = db.StringField(max_length=255)
     name = db.StringField(max_length=255)
@@ -43,8 +48,8 @@ class UserModel(db.Document, UserMixin):
     )
     grade = db.StringField(max_length=255)
 
-    poj = db.ReferenceField(AccountItem, reverse_delete_rule=NULLIFY)
-    sdut = db.ReferenceField(AccountItem, reverse_delete_rule=NULLIFY)
+    poj = db.EmbeddedDocumentField(Account)
+    sdut = db.EmbeddedDocumentField(Account)
 
     last_login_at = db.DateTimeField()
     current_login_at = db.DateTimeField()

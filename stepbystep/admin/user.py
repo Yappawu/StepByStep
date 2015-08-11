@@ -12,9 +12,9 @@ from stepbystep.models import UserModel, RoleModel
 class UserAdmin(ModelViewMixin):
 
     column_list = [
-        'name', 'roles', 'poj', 'sdut', 'created_at']
-    column_filters = ['username']
-    column_searchable_list = ['username']
+        'name', 'roles', 'poj.user_id', 'sdut.user_id', 'created_at']
+    column_filters = ['username', 'name']
+    column_searchable_list = ['username', 'name']
 
     form_excluded_columns = [
         'password', 'created_at', 'last_login_at', 'last_login_ip',

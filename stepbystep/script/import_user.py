@@ -6,7 +6,7 @@ sys.path.append('../../')
 
 
 def import_user():
-    from stepbystep.models import UserModel, AccountItem
+    from stepbystep.models import UserModel, AccountItem, Account
     with open('stepbystep_user.csv', 'r') as users:
         for sid, name, grade, sdut_id, poj_id in csv.reader(
                 users.read().splitlines()[1:]):
@@ -26,7 +26,11 @@ def import_user():
                         username=sdut_id
                     )
                     sdut_account.save()
-                    user.sdut = sdut_account
+                    a = Account(
+                        user_id=sdut_id,
+                        account=sdut_account
+                    )
+                    user.sdut = a
                     account_crawler.delay(
                         origin_oj='sdut',
                         username=sdut_id
@@ -37,7 +41,11 @@ def import_user():
                         username=poj_id
                     )
                     poj_account.save()
-                    user.poj = poj_account
+                    a = Account(
+                        user_id=poj_id,
+                        account=poj_account
+                    )
+                    user.poj = a
                     account_crawler.delay(
                         origin_oj='poj',
                         username=poj_id

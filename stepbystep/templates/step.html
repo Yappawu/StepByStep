@@ -48,16 +48,16 @@
           {% if problem.origin_oj == 'sdut' %}
             {% for user in users %}
               <td width="90px"> 
-              {% if user.sdut and user.sdut.solved %} 
-                  {{ user.sdut.solved.get(problem.problem_id, '') }} 
+              {% if user.sdut and user.sdut.account.solved %} 
+                  {{ user.sdut.account.solved.get(problem.problem_id, '') }} 
               {% endif %}
               </td>
             {% endfor %}
           {% elif problem.origin_oj == 'poj' %}
             {% for user in users %}
               <td width="90px">
-                {% if user.poj and user.poj.solved %} 
-                  {{ user.poj.solved.get(problem.problem_id, '') }} 
+                {% if user.poj and user.poj.account.solved %} 
+                  {{ user.poj.account.solved.get(problem.problem_id, '') }} 
                 {% endif %} 
               </td>
             {% endfor %}
