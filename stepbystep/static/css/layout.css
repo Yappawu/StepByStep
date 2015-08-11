@@ -8,6 +8,11 @@ body {
 	padding: 15px 20px 30px 35px;
 }
 
+.alert {
+    margin-top:15px;
+    margin-bottom:15px;
+}
+
 #content .row {
     margin-left: 0px;
 }
