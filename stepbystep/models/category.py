@@ -18,3 +18,7 @@ class CategoryModel(db.Document):
 
     def __unicode__(self):
         return '%s' % self.name
+
+    meta = {
+        'collection': 'Category'
+    }
