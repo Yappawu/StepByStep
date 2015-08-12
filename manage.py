@@ -26,13 +26,15 @@ def deploy():
     RoleModel.insert_roles()
     admin = RoleModel.objects(name='admin').first()
 
-    user = UserModel.create_user(
-        username='admin',
-        name='admin',
-        password='admin'
-    )
-    user.roles.append(admin)
-    user.save()
+    user = UserModel.objects(username='admin').first()
+    if user is None:
+        user = UserModel.create_user(
+            username='admin',
+            name='admin',
+            password='admin'
+        )
+        user.roles.append(admin)
+        user.save()
 
 
 if __name__ == '__main__':
