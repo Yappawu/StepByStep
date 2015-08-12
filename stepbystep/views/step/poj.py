@@ -24,7 +24,7 @@ class StepPojView(MethodView):
 
     template = 'step.html'
 
-    @cache.cached(timeout=3600)
+    @cache.cached(timeout=21600)
     def get(self, ordinal):
         role = RoleModel.objects(name=ordinal).first()
         ordinal = CategoryModel.objects.get_or_404(
