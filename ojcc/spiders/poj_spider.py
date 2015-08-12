@@ -13,7 +13,7 @@ class PojAccountSpider(Spider):
         'http://poj.org/status?problem_id=\
         &user_id=%s&result=0&language='
 
-    download_delay = 1
+    download_delay = 10
     solved = {}
 
     def __init__(
