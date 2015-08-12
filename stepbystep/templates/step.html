@@ -7,7 +7,7 @@
   <table class="table table-bordered" id="step_head">
     <thead>
       <tr>
-          <th colspan="3">{{ordinal}}</th>
+        <th colspan="3">{{ordinal}} {{problems | length}}题</th>
       </tr>
     </thead>
   </table>
@@ -34,7 +34,7 @@
     <thead>
       <tr height="74px">
         {% for user in users %}
-        <th width="90px">{{ user.name }}<br>{{ user.grade }}</th>
+        <th id={{ loop.index }} width="90px"><button class="close">×</button>{{ user.name }}<br>{{ user.grade }}</th>
         {% endfor %}
       </tr>
     </thead>
@@ -47,7 +47,7 @@
         <tr height="37px">
           {% if problem.origin_oj == 'sdut' %}
             {% for user in users %}
-              <td width="90px"> 
+              <td width="90px" id={{ loop.index }}> 
               {% if user.sdut and user.sdut.account.solved %} 
                   {{ user.sdut.account.solved.get(problem.problem_id, '') }} 
               {% endif %}
@@ -55,7 +55,7 @@
             {% endfor %}
           {% elif problem.origin_oj == 'poj' %}
             {% for user in users %}
-              <td width="90px">
+              <td width="90px" id={{ loop.index }}>
                 {% if user.poj and user.poj.account.solved %} 
                   {{ user.poj.account.solved.get(problem.problem_id, '') }} 
                 {% endif %} 
@@ -102,6 +102,25 @@ $(document).ready(function(){
       } 
     } 
   });
+})
+</script>
+<script>
+$(document).ready(function(){
+  $("#table_user th").each(function () {
+    var id = $(this).attr('id');
+    var text = $(this).html();
+    var ac = $("#table_solution #" + id).filter(".danger,.success").length;
+    var p = $("#table_solution #" + id).length;
+    if (ac == p){
+      $(this).attr("style", "background-color:#5cb85c;color:#fff");
+    }
+    $(this).html(text + "<br><p>" + ac + "题 / " + p + "题</p>" );
+  })
+  $(".close").click(function () {
+    var id = $(this).parent().attr('id');
+    $(this).parent().remove();
+    $("#table_solution #" + id).remove();
+  })
 })
 </script>
 {% endblock %}

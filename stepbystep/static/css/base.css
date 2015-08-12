@@ -56,6 +56,18 @@ table{
     top: 0px
 }
 
+#table_user th{
+    text-align: center; 
+    padding-bottom: 5px;
+    padding-top: 5px
+}
+
+#table_user th p{
+    margin: 0 0 0px;
+    font-weight: normal;
+    font-size: smaller;
+}
+
 #table_user{
     background-color:#FFFFFF;
 }
