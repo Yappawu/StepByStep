@@ -27,6 +27,13 @@ class Config:
         'port': 27017
     }
 
+    # cache
+    CACHE_TYPE = 'memcached'
+    CACHE_MEMCACHED_SERVERS = ['%s:%s' % (
+        os.environ.get('MEMCACHED_HOST', 'localhost'),
+        os.environ.get('MEMCACHED_PORT', '11211'),
+    )]
+
     # redis
     REDIS_URL = 'redis://%s:%s/%s' % (
         os.environ.get('REDIS_HOST', 'localhost'),

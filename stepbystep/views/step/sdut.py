@@ -10,6 +10,7 @@ from flask import (  # noqa
 
 from flask.views import MethodView
 
+from stepbystep import cache
 from stepbystep.models import ProblemModel, RoleModel, UserModel, CategoryModel
 
 ORDINAL = {
@@ -23,6 +24,7 @@ class StepSdutView(MethodView):
 
     template = 'step.html'
 
+    @cache.cached(timeout=3600)
     def get(self, ordinal):
         role = RoleModel.objects(name=ordinal).first()
         ordinal = CategoryModel.objects.get_or_404(
