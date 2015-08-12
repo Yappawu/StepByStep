@@ -7,6 +7,7 @@
 
 import pymongo
 
+
 class MongoPipeline(object):
 
     def __init__(self, mongo_uri, mongo_db):

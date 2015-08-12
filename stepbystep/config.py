@@ -29,11 +29,10 @@ class Config:
     # redis cache
     CACHE_TYPE = 'redis'
     CACHE_DEFAULT_TIMEOUT = 7200
-    CACHE_REDIS_URL = 'redis://%s:%s/%s' % (
-        os.environ.get('REDIS_HOST', 'localhost'),
-        os.environ.get('REDIS_PORT', '6379'),
-        os.environ.get('REDIS_DATABASE', '1'),
-    )
+    CACHE_REDIS_HOST = os.environ.get('REDIS_HOST', 'localhost')
+    CACHE_REDIS_PORT = os.environ.get('REDIS_PORT', '6379')
+    CACHE_REDIS_DB = os.environ.get('REDIS_DATABASE', '1')
+    CACHE_REDIS_PASSWORD = os.environ.get('REDIS_PASSWORD', '')
 
     # celery
     CELERY_BROKER_URL = 'redis://%s:%s' % (
