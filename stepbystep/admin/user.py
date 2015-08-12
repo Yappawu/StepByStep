@@ -6,7 +6,8 @@ from wtforms import fields
 
 from .mixin import ModelViewMixin
 from . import admin
-from stepbystep.models import UserModel, RoleModel
+from stepbystep.models import UserModel, RoleModel, AccountItem, Account
+from stepbystep.libs.tasks import account_crawler
 
 
 class UserAdmin(ModelViewMixin):
@@ -20,6 +21,15 @@ class UserAdmin(ModelViewMixin):
         'password', 'created_at', 'last_login_at', 'last_login_ip',
         'current_login_at', 'current_login_ip']
 
+    form_subdocuments = {
+        'poj': {
+            'form_columns': ('user_id', )
+        },
+        'sdut': {
+            'form_columns': ('user_id', )
+        }
+    }
+
     def scaffold_form(self):
         form_class = super(UserAdmin, self).scaffold_form()
         form_class.password2 = fields.StringField('Password')
@@ -30,6 +40,42 @@ class UserAdmin(ModelViewMixin):
             model.password = UserModel.generate_password(form.password2.data)
         elif not model.password:
             model.password = UserModel.generate_password('12345678')
+
+        if model.sdut.user_id:
+            account = AccountItem.objects(
+                origin_oj='sdut',
+                username=model.sdut.user_id
+            ).first()
+            if not account:
+                account = AccountItem.objects.create(
+                    origin_oj='sdut',
+                    username=model.sdut.user_id
+                )
+            account_crawler.delay(
+                origin_oj='sdut',
+                username=model.sdut.user_id
+            )
+            model.sdut.account = account
+        else:
+            model.sdut = Account(user_id='')
+
+        if model.poj.user_id:
+            account = AccountItem.objects(
+                origin_oj='poj',
+                username=model.poj.user_id
+            ).first()
+            if not account:
+                account = AccountItem.objects.create(
+                    origin_oj='poj',
+                    username=model.poj.user_id
+                )
+            account_crawler.delay(
+                origin_oj='poj',
+                username=model.poj.user_id
+            )
+            model.poj.account = account
+        else:
+            model.poj = Account(user_id='')
 
 
 class RoleAdmin(ModelViewMixin):
