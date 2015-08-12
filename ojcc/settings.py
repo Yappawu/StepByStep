@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 
+import os
+
 BOT_NAME = 'ojcc'
 
 SPIDER_MODULES = ['ojcc.spiders']
 NEWSPIDER_MODULE = 'ojcc.spiders'
 
 MONGO_URI = 'mongodb://localhost:27017/'
-MONGO_DATABASE = 'stepbystep'
+MONGO_DATABASE = os.environ.get('STEPBYSTEP_DB', 'dev-stepbystep')
 
 USER_AGENT_LIST = [
     "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 \
@@ -46,6 +48,7 @@ USER_AGENT_LIST = [
     "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/535.24 \
         (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24"
 ]
+
 DOWNLOADER_MIDDLEWARES = {
     'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
     'ojcc.middlewares.useragent.RandomUserAgentMiddleware': 400

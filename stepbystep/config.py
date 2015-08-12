@@ -20,7 +20,7 @@ class Config:
     CSRF_ENABLED = True
 
     # mongodb
-    MONGODB_DB = 'stepbystep',
+    MONGODB_DB = os.environ.get('STEPBYSTEP_DB', 'stepbystep'),
     MONGODB_USERNAME = os.environ.get('MONGODB_USERNAME', ''),
     MONGODB_PASSWORD = os.environ.get('MONGODB_PASSWORD', ''),
     MONGODB_HOST = os.environ.get('MONGODB_HOST', 'localhost'),
