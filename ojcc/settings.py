@@ -7,11 +7,16 @@ BOT_NAME = 'ojcc'
 SPIDER_MODULES = ['ojcc.spiders']
 NEWSPIDER_MODULE = 'ojcc.spiders'
 
+# mongodb
 MONGO_URI = 'mongodb://%s:%s/' % (
     os.environ.get('MONGODB_HOST', 'localhost'),
     os.environ.get('MONGODB_PORT', '27017'),
 )
 MONGO_DATABASE = os.environ.get('STEPBYSTEP_DB', 'dev-stepbystep')
+
+# log
+LOG_FILE = 'ojcc.log'
+LOG_LEVEL = os.environ.get('LOG_LEVEL', 'DEBUG')
 
 USER_AGENT_LIST = [
     "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 \
