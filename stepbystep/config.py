@@ -19,24 +19,10 @@ class Config:
         '\xd0J\xec\xbbw\nfc\xc5Q\xd0\x8cd\xf1')
     CSRF_ENABLED = True
 
-    MONGODB_SETTINGS = {
-        'db': 'stepbystep',
-        'username': '',
-        'password': '',
-        'host': '127.0.0.1',
-        'port': 27017
-    }
-
-    # cache
-    CACHE_TYPE = 'memcached'
+    # redis cache
+    CACHE_TYPE = 'redis'
     CACHE_DEFAULT_TIMEOUT = 7200
-    CACHE_MEMCACHED_SERVERS = ['%s:%s' % (
-        os.environ.get('MEMCACHED_HOST', 'localhost'),
-        os.environ.get('MEMCACHED_PORT', '11211'),
-    )]
-
-    # redis
-    REDIS_URL = 'redis://%s:%s/%s' % (
+    CACHE_REDIS_URL = 'redis://%s:%s/%s' % (
         os.environ.get('REDIS_HOST', 'localhost'),
         os.environ.get('REDIS_PORT', '6379'),
         os.environ.get('REDIS_DATABASE', '1'),
@@ -45,7 +31,8 @@ class Config:
     # celery
     CELERY_BROKER_URL = 'redis://%s:%s' % (
         os.environ.get('REDIS_HOST', 'localhost'),
-        os.environ.get('REDIS_PORT', '6379'))
+        os.environ.get('REDIS_PORT', '6379')
+    )
 
     CELERYBEAT_SCHEDULE = {
         'sdut_schedule': {
@@ -66,14 +53,40 @@ class Config:
 class DevelopmentConfig(Config):
     DEBUG = True
 
+    # mongo
+    MONGODB_SETTINGS = {
+        'db': 'dev-stepbystep',
+        'username': os.environ.get('MONGODB_USERNAME', ''),
+        'password': os.environ.get('MONGODB_PASSWORD', ''),
+        'host': os.environ.get('MONGODB_HOST', 'localhost'),
+        'port': os.environ.get('MONGODB_POST', '27017'),
+    }
+
 
 class TestingConfig(Config):
     TESTING = True
     WTF_CSRF_ENABLED = False
 
+    # mongo
+    MONGODB_SETTINGS = {
+        'db': 'test-stepbystep',
+        'username': os.environ.get('MONGODB_USERNAME', ''),
+        'password': os.environ.get('MONGODB_PASSWORD', ''),
+        'host': os.environ.get('MONGODB_HOST', 'localhost'),
+        'port': os.environ.get('MONGODB_POST', '27017'),
+    }
+
 
 class ProductionConfig(Config):
-    pass
+
+    # mongo
+    MONGODB_SETTINGS = {
+        'db': 'stepbystep',
+        'username': os.environ.get('MONGODB_USERNAME', ''),
+        'password': os.environ.get('MONGODB_PASSWORD', ''),
+        'host': os.environ.get('MONGODB_HOST', 'localhost'),
+        'port': os.environ.get('MONGODB_POST', '27017'),
+    }
 
 
 config = {
