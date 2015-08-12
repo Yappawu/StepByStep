@@ -24,9 +24,9 @@ SDUT StepByStep
 - export STEPBYSTEP_CONFIG='production'
 - export STEPBYSTEP_LOG_LEVEL='ERROR'
 - python manage.py deploy
-- celery -A stepbystep.libs.tasks:celery worker --loglevel=ERROR --logfile=celery_work.log &
-- celery -A stepbystep.libs.tasks:celery beat --loglevel=ERROR --logfile=celery_beat.log &
-- gunicorn -w 4 manage:app --log-level ERROR --log-file gunicorn_error.log -b 0.0.0.0:4000 &
+- celery -A stepbystep.libs.tasks:celery worker --logfile=celery_work.log &
+- celery -A stepbystep.libs.tasks:celery beat --logfile=celery_beat.log &
+- gunicorn -w 4 manage:app --log-file gunicorn_error.log -b 0.0.0.0:4000 &
 
 ## Stop 
 
