@@ -20,11 +20,11 @@ class Config:
     CSRF_ENABLED = True
 
     # mongodb
-    MONGODB_DB = os.environ.get('STEPBYSTEP_DB', 'stepbystep'),
-    MONGODB_USERNAME = os.environ.get('MONGODB_USERNAME', ''),
-    MONGODB_PASSWORD = os.environ.get('MONGODB_PASSWORD', ''),
-    MONGODB_HOST = os.environ.get('MONGODB_HOST', 'localhost'),
-    MONGODB_POST = os.environ.get('MONGODB_POST', '27017'),
+    MONGODB_DB = os.environ.get('STEPBYSTEP_DB', 'stepbystep')
+    MONGODB_USERNAME = os.environ.get('MONGODB_USERNAME', '')
+    MONGODB_PASSWORD = os.environ.get('MONGODB_PASSWORD', '')
+    MONGODB_HOST = os.environ.get('MONGODB_HOST', 'localhost')
+    MONGODB_PORT = os.environ.get('MONGODB_PORT', '27017')
 
     # redis cache
     CACHE_TYPE = 'redis'
@@ -61,7 +61,7 @@ class DevelopmentConfig(Config):
     DEBUG = True
 
     # mongo
-    MONGODB_DB = 'dev-stepbystep',
+    MONGODB_DB = os.environ.get('STEPBYSTEP_DB', 'dev-stepbystep')
 
 
 class TestingConfig(Config):
@@ -69,7 +69,7 @@ class TestingConfig(Config):
     WTF_CSRF_ENABLED = False
 
     # mongo
-    MONGODB_DB = 'test-stepbystep',
+    MONGODB_DB = os.environ.get('STEPBYSTEP_DB', 'test-stepbystep')
 
 
 class ProductionConfig(Config):
