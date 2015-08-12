@@ -29,6 +29,7 @@ class Config:
 
     # cache
     CACHE_TYPE = 'memcached'
+    CACHE_DEFAULT_TIMEOUT = 7200
     CACHE_MEMCACHED_SERVERS = ['%s:%s' % (
         os.environ.get('MEMCACHED_HOST', 'localhost'),
         os.environ.get('MEMCACHED_PORT', '11211'),
@@ -49,11 +50,11 @@ class Config:
     CELERYBEAT_SCHEDULE = {
         'sdut_schedule': {
             'task': 'stepbystep.libs.tasks.sdut_schedule',
-            'schedule': crontab(hour="*/12"),
+            'schedule': crontab(hour=12),
         },
         'poj_schedule': {
             'task': 'stepbystep.libs.tasks.poj_schedule',
-            'schedule': crontab(hour="*/6"),
+            'schedule': crontab(hour=3),
         },
     }
 
