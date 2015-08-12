@@ -43,11 +43,11 @@ class Config:
     CELERYBEAT_SCHEDULE = {
         'sdut_schedule': {
             'task': 'stepbystep.libs.tasks.sdut_schedule',
-            'schedule': crontab(hour=12),
+            'schedule': crontab(minute=0, hour=2),
         },
         'poj_schedule': {
             'task': 'stepbystep.libs.tasks.poj_schedule',
-            'schedule': crontab(hour=3),
+            'schedule': crontab(minute=0, hour=4),
         },
     }
 
