@@ -15,8 +15,7 @@ MONGO_URI = 'mongodb://%s:%s/' % (
 MONGO_DATABASE = os.environ.get('STEPBYSTEP_DB', 'dev-stepbystep')
 
 # log
-LOG_FILE = 'ojcc.log'
-LOG_LEVEL = os.environ.get('LOG_LEVEL', 'DEBUG')
+LOG_LEVEL = os.environ.get('STEPBYSTEP_LOG_LEVEL', 'DEBUG')
 
 USER_AGENT_LIST = [
     "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 \

@@ -22,10 +22,11 @@ SDUT StepByStep
 
 - export STEPBYSTEP_DB='stepbystep'
 - export STEPBYSTEP_CONFIG='production'
-- export LOG_LEVEL='ERROR'
+- export STEPBYSTEP_LOG_LEVEL='ERROR'
 - python manage.py deploy
-- celery -A stepbystep.libs.tasks:celery worker -B --loglevel=ERROR --logfile=celery.log &
-- gunicorn -w 4 manage:app --log-file=stepbystep.log --error-logfile stepbystep_error.log -b 0.0.0.0:4000 &
+- celery -A stepbystep.libs.tasks:celery worker --loglevel=ERROR --logfile=celery_work.log &
+- celery -A stepbystep.libs.tasks:celery beat --loglevel=ERROR --logfile=celery_beat.log &
+- gunicorn -w 4 manage:app --log-level ERROR --log-file gunicorn_error.log -b 0.0.0.0:4000 &
 
 ## Stop 
 
