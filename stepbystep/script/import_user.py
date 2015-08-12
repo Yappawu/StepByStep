@@ -21,31 +21,27 @@ def import_user():
                         grade=grade
                     )
                 if sdut_id:
-                    sdut_account = AccountItem(
+                    sdut_account = AccountItem.objects.create(
                         origin_oj='sdut',
                         username=sdut_id
                     )
-                    sdut_account.save()
-                    a = Account(
+                    user.sdut = Account(
                         user_id=sdut_id,
                         account=sdut_account
                     )
-                    user.sdut = a
                     account_crawler.delay(
                         origin_oj='sdut',
                         username=sdut_id
                     )
                 if poj_id:
-                    poj_account = AccountItem(
+                    poj_account = AccountItem.objects.create(
                         origin_oj='poj',
                         username=poj_id
                     )
-                    poj_account.save()
-                    a = Account(
+                    user.poj = Account(
                         user_id=poj_id,
                         account=poj_account
                     )
-                    user.poj = a
                     account_crawler.delay(
                         origin_oj='poj',
                         username=poj_id
