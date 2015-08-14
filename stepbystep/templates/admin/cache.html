@@ -1,0 +1,17 @@
+{% extends 'admin/master.html' %}
+
+{% block body %}
+<hr>
+<a href="/admin/cache/clear" class="btn btn-primary clear">Clear</a>
+{% endblock %}
+
+{% block tail %}
+{{ super() }}
+<script>
+ $(document).ready(function(){
+    $(".clear").click(function(){
+      return confirm("清除缓存？"); 
+    });
+  });
+</script>
+{% endblock %}

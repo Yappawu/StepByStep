@@ -26,3 +26,4 @@ admin = Admin(
 from . import user  # noqa
 from . import problem  # noqa
 from . import category  # noqa
+from . import cache  # noqa
