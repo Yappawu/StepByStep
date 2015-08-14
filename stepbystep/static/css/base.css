@@ -70,6 +70,7 @@ table{
 
 #table_user{
     background-color:#FFFFFF;
+    width: 90px;
 }
 
 #step_solution{
@@ -77,6 +78,7 @@ table{
 }
 
 #table_solution{
+    width: 90px;
 }
 
 .fix_div1{
