@@ -28,6 +28,7 @@ with app.app_context():
         bp_index,
         bp_auth,
         bp_step,
+        bp_statistics
     )
 
     app.register_blueprint(
@@ -43,4 +44,9 @@ with app.app_context():
     app.register_blueprint(
         bp_step,
         url_prefix='/step'
+    )
+
+    app.register_blueprint(
+        bp_statistics,
+        url_prefix='/statistics'
     )

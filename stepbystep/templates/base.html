@@ -41,6 +41,9 @@
                 <li><a href="{{ url_for('step.poj', ordinal='senior') }}">算法高级 (POJ)</a></li>
               </ul>
             </li>
+            <li>
+              <a href="{{ url_for('statistics.all') }}">做题统计</a>
+            </li>
           </ul>
           <!--ul class="nav navbar-nav navbar-right">
             {% if current_user.is_authenticated() %}
@@ -63,9 +66,7 @@
         </div> 
       </div>
     </nav>
-    <div class="row">
       {% block page_content %}{% endblock %}
-    </div>
     {% block script %}
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="{{ url_for('static', filename='js/jquery-1.11.2.min.js') }}"></script>

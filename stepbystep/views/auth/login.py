@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import (
+from flask import (  # noqa
     request,
     redirect,
     url_for,
@@ -30,4 +30,4 @@ class LoginView(MethodView):
             return render_template(self.template, form=form)
         login_user(form.user, form.remember_me)
         flash('Login success')
-        return redirect(url_for('index.index'))
+        return redirect(request.args.get('next') or url_for('index.index'))

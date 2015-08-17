@@ -7,6 +7,7 @@
 
 import scrapy
 
+
 class AccountItem(scrapy.Item):
 
     origin_oj = scrapy.Field()
@@ -17,3 +18,4 @@ class AccountItem(scrapy.Item):
     rank = scrapy.Field()
     status = scrapy.Field()
     solved = scrapy.Field()
+    rating = scrapy.Field()

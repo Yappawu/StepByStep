@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% from "_macro/_pagination.html" import render_pagination %}
+
+{% block title %}{% endblock %}
+
+{% block page_content %}
+<div class="container">
+  <ul class="nav nav-tabs">
+    <li role="presentation" class="active"><a href="#">All</a></li>
+  </ul>
+  <div class="right">
+  {{ render_pagination(paginate, 'statistics.all') }}
+  </div>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <td>姓名 </td>
+        <td>年级 </td>
+        <td>SDUTOJ </td>
+        <td>POJ </td>
+        <td>HDUOJ </td>
+        <td>BestCoder Rating</td>
+        <td>TopCoder Rating</td>
+        <td>CodeForces Rating</td>
+      </tr>
+    </thead>
+    <tbody>
+      {% for u in users %}
+      <tr>
+        <td> {{ u.name }} </td>
+        <td> {{ u.grade }} </td>
+        <td> 
+          {% if u.sdut.account.accept %}
+          {{ u.sdut.account.accept }} 
+          {% else %}
+          0
+          {% endif %}
+        </td>
+        <td> 
+          {% if u.poj.account.accept %}
+          {{ u.poj.account.accept }}
+          {% else %}
+          0
+          {% endif %}
+        </td>
+        <td> 
+          {% if u.hduoj.account.accept %}
+          {{ u.hduoj.account.accept }}
+          {% else %}
+          0
+          {% endif %}
+        </td>
+        <td> 
+          {% if u.bestcoder.account.rating %}
+          <a href="http://bestcoder.hdu.edu.cn/rating.php?user={{ u.bestcoder.user_id }}" target="_blank">{{ u.bestcoder.account.rating }}</a>
+          {% else %}
+          0
+          {% endif %}
+        </td>
+        <td> 
+          {% if u.topcoder.account.rating %}
+          <a href="http://community.topcoder.com/tc?module=MemberProfile&cr={{ u.topcoder.user_id }}" target="_blank">{{ u.topcoder.account.rating }}</a>
+          {% else %}
+          0
+          {% endif %}
+        </td>
+        <td>
+          {% if u.codeforces.account.rating %}
+          <a href="http://codeforces.com/profile/{{ u.codeforces.user_id }}" target="_blank">{{ u.codeforces.account.rating }}</a>
+          {% else %}
+          0
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
