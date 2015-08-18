@@ -3,4 +3,33 @@
 {% block title %}{% endblock %}
 
 {% block page_content %}
+<div class="container">
+  <div id="title"></div>
+  <div id="back"></div>
+  <div id="features"></div>
+</div>
+{% endblock %}
+
+{% block script %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/theater.min.js') }}"></script>
+<script>
+var theater = new TheaterJS();
+
+theater
+    .describe("Title", .8, "#title")
+    .describe("Back", .6, "#back")
+    .describe("Features", .7, "#features")
+
+theater
+    .write("Title:<h1>Welcome to StepByStep 2.0</h1>", 600)
+    .write("Features:<h3>New Features</h3><p>* Support SDUT training program.<a href='/step/sdut/program_1'> <i class='fa fa-link'></i></a></p><p>* UI update.</p>", 600)
+    .write("Back:<a href='http://stepbystep.sdutacm.org'>Go back stepbystep 1.0</a>", 600)
+
+theater
+    .on("say:start, erase:start", function () {
+    })
+    .on("say:end, erase:end", function () {
+    })
+</script>
 {% endblock %}

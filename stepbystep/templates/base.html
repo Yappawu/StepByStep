@@ -26,23 +26,23 @@
           <a class="navbar-brand" href="#">
             <i class="fa fa-paper-plane"></i>
           </a>
-          <a class="navbar-brand" href="{{ url_for('index.index') }}">SDUT StepByStep</a> </div>
+          <a class="navbar-brand" href="{{ url_for('index.index') }}">StepByStep<sup> 2.0</sup></a> </div>
         <div class="collapse navbar-collapse" id="navbar">
           <ul class="nav navbar-nav">
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">训练计划 <span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Training Program <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="{{ url_for('step.sdut', ordinal='program_1') }}">程序设计基础I (SDUTOJ) </a></li>
-                <li><a href="{{ url_for('step.sdut', ordinal='program_2') }}">程序设计基础II (SDUTOJ) </a></li>
-                <li><a href="{{ url_for('step.sdut', ordinal='data_structure') }}">数据结构 (SDUTOJ) </a></li>
+                <li><a href="{{ url_for('step.sdut', ordinal='program_1') }}">Program Design Basis I (SDUTOJ) </a></li>
+                <li><a href="{{ url_for('step.sdut', ordinal='program_2') }}">Program Design Basis II (SDUTOJ) </a></li>
+                <li><a href="{{ url_for('step.sdut', ordinal='data_structure') }}">Data Structure (SDUTOJ) </a></li>
                 <li class="divider"></li>
-                <li><a href="{{ url_for('step.poj', ordinal='junior') }}">算法初级 (POJ) </a></li>
-                <li><a href="{{ url_for('step.poj', ordinal='middle') }}">算法中级 (POJ)</a></li>
-                <li><a href="{{ url_for('step.poj', ordinal='senior') }}">算法高级 (POJ)</a></li>
+                <li><a href="{{ url_for('step.poj', ordinal='junior') }}">Primary Algorithm (POJ) </a></li>
+                <li><a href="{{ url_for('step.poj', ordinal='middle') }}">Intermediate Algorithm (POJ)</a></li>
+                <li><a href="{{ url_for('step.poj', ordinal='senior') }}">Advanced Algorithm (POJ)</a></li>
               </ul>
             </li>
             <li>
-              <a href="{{ url_for('statistics.all') }}">做题统计</a>
+              <a href="{{ url_for('statistics.all') }}">Do Statistics</a>
             </li>
           </ul>
           <!--ul class="nav navbar-nav navbar-right">
@@ -67,6 +67,9 @@
       </div>
     </nav>
       {% block page_content %}{% endblock %}
+    <footer class="navbar-fixed-bottom">
+      <p class="text-center">Design by <a href="http://www.zrq495.com" target="_blank">zrq495</a> , <a href="http://blog.gentoox.org" target="_blank">timeship</a> and <a href="http://nplus.asia" target="_blank">Junnplus</a>.<br>© 2013-2015 <a href="mailto:">SDUT ACM Team</a>. All Rights Reserved.</p>
+    </footer>
     {% block script %}
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="{{ url_for('static', filename='js/jquery-1.11.2.min.js') }}"></script>
