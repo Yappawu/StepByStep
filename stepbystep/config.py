@@ -19,6 +19,8 @@ class Config:
         '\xd0J\xec\xbbw\nfc\xc5Q\xd0\x8cd\xf1')
     CSRF_ENABLED = True
 
+    STATISTICS_PER_PAGE = 30
+
     # mongodb
     MONGODB_DB = os.environ.get('STEPBYSTEP_DB', 'stepbystep')
     MONGODB_USERNAME = os.environ.get('MONGODB_USERNAME', '')
@@ -48,6 +50,14 @@ class Config:
         'poj_schedule': {
             'task': 'stepbystep.libs.tasks.poj_schedule',
             'schedule': crontab(minute=0, hour=4),
+        },
+        'hduoj_schedule': {
+            'task': 'stepbystep.libs.tasks.hduoj_schedule',
+            'schedule': crontab(minute=0, hour=6),
+        },
+        'rating_schedule': {
+            'task': 'stepbystep.libs.tasks.rating_schedule',
+            'schedule': crontab(minute=30, hour=3, day_of_week='sunday'),
         },
     }
 

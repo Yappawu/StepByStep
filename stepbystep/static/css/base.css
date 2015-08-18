@@ -1,5 +1,15 @@
 body {
     padding-top: 65px;
+    font-family: cursive;
+    padding-bottom:75px;
+}
+
+footer {
+    padding-top: 20px;
+    padding-bottom: 10px;
+    border-top: 1px solid #e5e5e5;
+    background-color: #fff;
+    color: #777
 }
 
 .content{
