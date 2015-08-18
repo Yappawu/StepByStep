@@ -59,7 +59,7 @@
         </td>
         <td> 
           {% if u.topcoder.account.rating %}
-          <a href="http://community.topcoder.com/tc?module=MemberProfile&cr={{ u.topcoder.user_id }}" target="_blank">{{ u.topcoder.account.rating }}</a>
+          <a href="http://community.topcoder.com/tc?module=SimpleSearch&ha={{ u.topcoder.user_id }}" target="_blank">{{ u.topcoder.account.rating }}</a>
           {% else %}
           0
           {% endif %}
