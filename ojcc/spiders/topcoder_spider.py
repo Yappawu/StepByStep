@@ -26,6 +26,6 @@ class TopcoderAccountSpider(Spider):
         item['origin_oj'] = 'topcoder'
         item['username'] = self.username
 
-        item['rating'] = sel.xpath('//span[@class="coderTextBlue"]/text()').\
+        item['rating'] = sel.xpath('//*[@id="left"]/h1/span[1]/text()').\
             extract()[0]
         return item
