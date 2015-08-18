@@ -26,6 +26,6 @@ class CodeforcesAccountSpider(Spider):
         item['origin_oj'] = 'codeforces'
         item['username'] = self.username
 
-        item['rating'] = sel.xpath('//span[@class="user-violet"]/text()').\
-            extract()[1]
+        item['rating'] = sel.xpath('//div[@class="info"]/ul/li[1]/span[1]/text()').\
+            extract()[0]
         return item
