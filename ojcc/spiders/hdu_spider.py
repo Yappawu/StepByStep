@@ -7,7 +7,7 @@ from ojcc.items import AccountItem
 
 
 class HduAccountSpider(Spider):
-    name = 'hdu_user'
+    name = 'hduoj_user'
     allowed_domains = ['acm.hdu.edu.cn']
 
     accepted_url = \
