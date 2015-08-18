@@ -17,6 +17,7 @@ class RoleModel(db.Document):
                 'junior': '算法初级（POJ）',
                 'middle': '算法中级（POJ）',
                 'senior': '算法高级（POJ）',
+                'statistics': '做题统计',
                 'admin': '管理员'
         }
         for r in roles:

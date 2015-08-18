@@ -27,7 +27,19 @@ class UserAdmin(ModelViewMixin):
         },
         'sdut': {
             'form_columns': ('user_id', )
-        }
+        },
+        'hduoj': {
+            'form_columns': ('user_id', )
+        },
+        'bestcoder': {
+            'form_columns': ('user_id', )
+        },
+        'topcoder': {
+            'form_columns': ('user_id', )
+        },
+        'codeforces': {
+            'form_columns': ('user_id', )
+        },
     }
 
     def scaffold_form(self):
@@ -40,6 +52,60 @@ class UserAdmin(ModelViewMixin):
             model.password = UserModel.generate_password(form.password2.data)
         elif not model.password:
             model.password = UserModel.generate_password('12345678')
+
+        if model.bestcoder.user_id:
+            account = AccountItem.objects(
+                origin_oj='bestcoder',
+                username=model.bestcoder.user_id
+            ).first()
+            if not account:
+                account = AccountItem.objects.create(
+                    origin_oj='bestcoder',
+                    username=model.bestcoder.user_id
+                )
+            account_crawler.delay(
+                origin_oj='bestcoder',
+                username=model.bestcoder.user_id
+            )
+            model.bestcoder.account = account
+        else:
+            model.bestcoder = Account(user_id='')
+
+        if model.topcoder.user_id:
+            account = AccountItem.objects(
+                origin_oj='topcoder',
+                username=model.topcoder.user_id
+            ).first()
+            if not account:
+                account = AccountItem.objects.create(
+                    origin_oj='topcoder',
+                    username=model.topcoder.user_id
+                )
+            account_crawler.delay(
+                origin_oj='topcoder',
+                username=model.topcoder.user_id
+            )
+            model.topcoder.account = account
+        else:
+            model.topcoder = Account(user_id='')
+
+        if model.codeforces.user_id:
+            account = AccountItem.objects(
+                origin_oj='codeforces',
+                username=model.codeforces.user_id
+            ).first()
+            if not account:
+                account = AccountItem.objects.create(
+                    origin_oj='codeforces',
+                    username=model.codeforces.user_id
+                )
+            account_crawler.delay(
+                origin_oj='codeforces',
+                username=model.codeforces.user_id
+            )
+            model.codeforces.account = account
+        else:
+            model.codeforces = Account(user_id='')
 
         if model.sdut.user_id:
             account = AccountItem.objects(
@@ -58,6 +124,24 @@ class UserAdmin(ModelViewMixin):
             model.sdut.account = account
         else:
             model.sdut = Account(user_id='')
+
+        if model.hduoj.user_id:
+            account = AccountItem.objects(
+                origin_oj='hduoj',
+                username=model.hduoj.user_id
+            ).first()
+            if not account:
+                account = AccountItem.objects.create(
+                    origin_oj='hduoj',
+                    username=model.hduoj.user_id
+                )
+            account_crawler.delay(
+                origin_oj='hduoj',
+                username=model.hduoj.user_id
+            )
+            model.hduoj.account = account
+        else:
+            model.hduoj = Account(user_id='')
 
         if model.poj.user_id:
             account = AccountItem.objects(

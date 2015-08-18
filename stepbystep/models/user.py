@@ -20,6 +20,7 @@ class AccountItem(db.Document):
     submit = db.StringField()
     rank = db.StringField()
     solved = db.DictField()
+    rating = db.StringField()
 
     meta = {
         'collection': 'AccountItem'
@@ -50,6 +51,10 @@ class UserModel(db.Document, UserMixin):
 
     poj = db.EmbeddedDocumentField(Account)
     sdut = db.EmbeddedDocumentField(Account)
+    hduoj = db.EmbeddedDocumentField(Account)
+    bestcoder = db.EmbeddedDocumentField(Account)
+    topcoder = db.EmbeddedDocumentField(Account)
+    codeforces = db.EmbeddedDocumentField(Account)
 
     last_login_at = db.DateTimeField()
     current_login_at = db.DateTimeField()

@@ -3,69 +3,71 @@
 {% block title %}{% endblock %}
 
 {% block page_content %}
-<div id="step_problem" class="col-md-3 fix_div1">
-  <table class="table table-bordered" id="step_head">
-    <thead>
-      <tr>
-        <th colspan="3">{{ordinal}} {{problems | length}}题</th>
-      </tr>
-    </thead>
-  </table>
-  <table class="table table-bordered" id="table_problem">
-    <thead>
-      <tr>
-          <th width="24%">专项</td>
-          <th>专题</th>
-          <th width="16%">题目</th>
-      </tr>
-    </thead>
-    <tbody>
-    {% for problem in problems %}
-    <tr>
-      <td style="white-space: normal" title="{{ problem.category.parent.name }}">{{ problem.category.parent.name }}</td>
-      <td title="{{ problem.category.name }}">{{ problem.category.name }}</td>
-      <td>{{ problem.problem_id }}</td>
-    </tr>
-    {% endfor %}
-  </table>
-</div>
-<div id="step_user" class="col-md-8 fix_div2">
-  <table class="table table-bordered" id="table_user">
-    <thead>
-      <tr height="74px">
-        {% for user in users %}
-        <th id={{ loop.index }} width="90px"><button class="close">×</button>{{ user.name }}<br>{{ user.grade }}</th>
-        {% endfor %}
-      </tr>
-    </thead>
-  </table>
-</div>
-<div id="step_solution" class="col-md-8">
-  <table class="table table-bordered" id="table_solution"> 
-    <tbody>
-      {% for problem in problems %}
-        <tr height="37px">
-          {% if problem.origin_oj == 'sdut' %}
-            {% for user in users %}
-              <td width="90px" id={{ loop.index }}> 
-              {% if user.sdut and user.sdut.account.solved %} 
-                  {{ user.sdut.account.solved.get(problem.problem_id, '') }} 
-              {% endif %}
-              </td>
-            {% endfor %}
-          {% elif problem.origin_oj == 'poj' %}
-            {% for user in users %}
-              <td width="90px" id={{ loop.index }}>
-                {% if user.poj and user.poj.account.solved %} 
-                  {{ user.poj.account.solved.get(problem.problem_id, '') }} 
-                {% endif %} 
-              </td>
-            {% endfor %}
-          {% endif %}
+<div class="row">
+  <div id="step_problem" class="col-md-3 fix_div1">
+    <table class="table table-bordered" id="step_head">
+      <thead>
+        <tr>
+          <th colspan="3">{{ordinal}} {{problems | length}}题</th>
         </tr>
+      </thead>
+    </table>
+    <table class="table table-bordered" id="table_problem">
+      <thead>
+        <tr>
+            <th width="24%">专项</td>
+            <th>专题</th>
+            <th width="16%">题目</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for problem in problems %}
+      <tr>
+        <td style="white-space: normal" title="{{ problem.category.parent.name }}">{{ problem.category.parent.name }}</td>
+        <td title="{{ problem.category.name }}">{{ problem.category.name }}</td>
+        <td>{{ problem.problem_id }}</td>
+      </tr>
       {% endfor %}
-    </tbody>
-  </table>
+    </table>
+  </div>
+  <div id="step_user" class="col-md-8 fix_div2">
+    <table class="table table-bordered" id="table_user">
+      <thead>
+        <tr height="74px">
+          {% for user in users %}
+          <th id={{ loop.index }} width="90px"><button class="close">×</button>{{ user.name }}<br>{{ user.grade }}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div id="step_solution" class="col-md-8">
+    <table class="table table-bordered" id="table_solution"> 
+      <tbody>
+        {% for problem in problems %}
+          <tr height="37px">
+            {% if problem.origin_oj == 'sdut' %}
+              {% for user in users %}
+                <td width="90px" id={{ loop.index }}> 
+                {% if user.sdut and user.sdut.account.solved %} 
+                    {{ user.sdut.account.solved.get(problem.problem_id, '') }} 
+                {% endif %}
+                </td>
+              {% endfor %}
+            {% elif problem.origin_oj == 'poj' %}
+              {% for user in users %}
+                <td width="90px" id={{ loop.index }}>
+                  {% if user.poj and user.poj.account.solved %} 
+                    {{ user.poj.account.solved.get(problem.problem_id, '') }} 
+                  {% endif %} 
+                </td>
+              {% endfor %}
+            {% endif %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </div>
 {% endblock %}
 
@@ -121,6 +123,12 @@ $(document).ready(function(){
     $(this).parent().remove();
     $("#table_solution #" + id).remove();
   })
+})
+</script>
+<script>
+$(document).ready(function(){
+  $("body").css("padding-bottom","0px");
+  $("footer").removeClass("navbar-fixed-bottom");
 })
 </script>
 {% endblock %}
